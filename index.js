@@ -11,7 +11,6 @@ const HatUrl = 'https://row.lyleandscott.com/products/racked-rib-beanie-true-bla
 const serverUrl = 'http://bsuser_ZvQmut:TGaiaS6ezp6ikhQT3TWD@hub-cloud.browserstack.com/wd/hub';
 const itemAddedToBagText = 'Item added to bag';
 const acceptCookiesButtonCssSelector = 'button#onetrust-accept-btn-handler';
-const deliveryLocationROTWButtonXpathSelector = '//span[text()=\'Rest of the World\']';
 const hatTitleOnHatPageCssSelector = 'h1.main-product__title';
 const hatSizeXpathSelector = '//div[@class="size-selector__content"]/div[text()=\'1SZ\']';
 const hatPriceOnHatPageCssSelector = 'span.main-product__price';
@@ -40,9 +39,6 @@ describe("Add a Hat to the Bag test", () => {
     //closing all popups
     await driver.wait(until.elementLocated(By.css(acceptCookiesButtonCssSelector)), 5000);
     await driver.findElement(By.css(acceptCookiesButtonCssSelector)).click();
-
-    await driver.wait(until.elementLocated(By.xpath(deliveryLocationROTWButtonXpathSelector)), 15000);
-    await driver.findElement(By.xpath(deliveryLocationROTWButtonXpathSelector)).click();
 
     //hat page
     const hatPriceOnHatPage = await driver.findElement(By.css(hatPriceOnHatPageCssSelector)).getText();
