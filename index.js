@@ -1,4 +1,6 @@
-const { Builder, By, until} = require('selenium-webdriver');
+const webdriver = require('selenium-webdriver');
+const { Builder, By, until} = webdriver;
+const capabilities = require('./capabilities.json');
 require("chromedriver");
 
 const chai = require("chai");
@@ -6,6 +8,7 @@ const expect = chai.expect;
 chai.config.showDiff = true;
 
 const HatUrl = 'https://row.lyleandscott.com/products/racked-rib-beanie-true-black';
+const serverUrl = 'http://bsuser_ZvQmut:TGaiaS6ezp6ikhQT3TWD@hub-cloud.browserstack.com/wd/hub';
 const itemAddedToBagText = 'Item added to bag';
 const acceptCookiesButtonCssSelector = 'button#onetrust-accept-btn-handler';
 const deliveryLocationROTWButtonXpathSelector = '//span[text()=\'Rest of the World\']';
@@ -23,7 +26,13 @@ const totalPriceInTheBagCssSelector = 'h2.cart-summary__title';
 
 describe("Add a Hat to the Bag test", () => {
   it('Should add a Hat to the Bag', async function () {
-    let driver = await new Builder().forBrowser('chrome').build();
+    let driver = new webdriver.Builder()
+        .usingServer(serverUrl)
+        .withCapabilities({
+          ...capabilities,
+          ...capabilities['browser'] && { browserName: capabilities['browser']}  // Because NodeJS language binding requires browserName to be defined
+        })
+        .build();
 
     await driver.get(HatUrl);
     await driver.manage().window().maximize();
