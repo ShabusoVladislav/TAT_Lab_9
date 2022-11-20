@@ -41,7 +41,7 @@ describe("Add a Hat to the Bag test", () => {
     await driver.wait(until.elementLocated(By.css(acceptCookiesButtonCssSelector)), 5000);
     await driver.findElement(By.css(acceptCookiesButtonCssSelector)).click();
 
-    await driver.wait(until.elementLocated(By.xpath(deliveryLocationROTWButtonXpathSelector)), 5000);
+    await driver.wait(until.elementLocated(By.xpath(deliveryLocationROTWButtonXpathSelector)), 15000);
     await driver.findElement(By.xpath(deliveryLocationROTWButtonXpathSelector)).click();
 
     //hat page
